@@ -9,8 +9,9 @@ const MainDiv = styled.div`
 
 const Input = styled.input`
   margin-top: 24px;
+  max-width: 100%;
+  margin-right: 24px;
   margin-left: 24px;
-  width: 327px;
   height: 48px;
   background-color: #f4f4f4;
   border-style: none;
