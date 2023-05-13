@@ -10,7 +10,7 @@ const MainDiv = styled.div`
 const Input = styled.input`
   margin-top: 24px;
   margin-left: 24px;
-  width: 90%;
+  width: 327px;
   height: 48px;
   background-color: #f4f4f4;
   border-style: none;
