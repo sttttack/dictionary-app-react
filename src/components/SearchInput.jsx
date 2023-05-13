@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import Word from "../MyContext";
+import Search from "../assets/images/icon-search.svg";
 
 const MainDiv = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ const Input = styled.input`
   border-style: none;
   border-radius: 16px;
   padding-left: 24px;
-  background-image: url("src/assets/images/icon-search.svg");
+  background-image: url("${Search}");
   background-repeat: no-repeat;
   background-position: center;
   background-position-x: 90%;
