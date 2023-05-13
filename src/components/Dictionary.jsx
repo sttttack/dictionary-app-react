@@ -200,29 +200,32 @@ export default function Dictionary() {
           {value ? <Li>{item.definition}</Li> : null}
         </Ul>
       ))}
-      <BottomSolidLine />
-      <div style={{ marginBottom: 84 }}>
-        <p
-          style={{
-            fontSize: 16,
-            color: "#757575",
-            width: 65,
-            height: 20,
-            paddingLeft: 24,
-            textDecoration: "underline",
-          }}
-        >
-          Source
-        </p>
-        <a
-          href={wikiLink}
-          style={{
-            paddingLeft: 24,
-          }}
-        >
-          {wikiLink}
-        </a>
-      </div>
+
+      {value ? <BottomSolidLine /> : null}
+      {value ? (
+        <div style={{ marginBottom: 84 }}>
+          <p
+            style={{
+              fontSize: 16,
+              color: "#757575",
+              width: 65,
+              height: 20,
+              paddingLeft: 24,
+              textDecoration: "underline",
+            }}
+          >
+            Source
+          </p>
+          <a
+            href={wikiLink}
+            style={{
+              paddingLeft: 24,
+            }}
+          >
+            {wikiLink}
+          </a>
+        </div>
+      ) : null}
     </>
   );
 }
