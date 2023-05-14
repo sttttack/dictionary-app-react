@@ -7,7 +7,6 @@ import Play from "../assets/images/icon-play.svg";
 export default function Dictionary() {
   const { value, setValue } = useContext(Word);
   const [post, setPost] = useState(null);
-  const [audio, setAudio] = useState(null);
 
   useEffect(() => {
     axios
@@ -40,10 +39,17 @@ export default function Dictionary() {
     stereo.play();
   }
 
+  // Get Part Of Speech
+
+  const verbsArray = post[0].meanings
+    .filter((meaning) => meaning.partOfSpeech === "verb")
+    .flatMap((meaning) => meaning.definitions);
+
+  console.log(verbsArray);
+
   const synonyms = post[0].meanings[0].synonyms;
   const newSynonyms = synonyms.join(", ");
   const noun = post[0].meanings[0].definitions;
-  const definitions = post[0].meanings[0].definitions;
   const wikiLink = post[0].sourceUrls[0];
 
   const MainDiv = styled.div`
@@ -194,13 +200,12 @@ export default function Dictionary() {
             Meaning
           </p>
         ) : null}
+        {verbsArray.map((item, index) => (
+          <Ul key={index} style={{ marginTop: 30 }}>
+            <Li>{item.definition}</Li>
+          </Ul>
+        ))}
       </ContentDiv>
-      {definitions.map((item, index) => (
-        <Ul key={index} style={{ marginTop: 30 }}>
-          {value ? <Li>{item.definition}</Li> : null}
-        </Ul>
-      ))}
-
       {value ? <BottomSolidLine /> : null}
       {value ? (
         <div style={{ marginBottom: 84 }}>
