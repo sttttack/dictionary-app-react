@@ -45,12 +45,14 @@ export default function Dictionary() {
     .filter((meaning) => meaning.partOfSpeech === "verb")
     .flatMap((meaning) => meaning.definitions);
 
-  console.log(verbsArray);
+  // Get Synonyms and Wikipedia
 
   const synonyms = post[0].meanings[0].synonyms;
   const newSynonyms = synonyms.join(", ");
   const noun = post[0].meanings[0].definitions;
   const wikiLink = post[0].sourceUrls[0];
+
+  // Component styling
 
   const MainDiv = styled.div`
     display: flex;
@@ -108,6 +110,31 @@ export default function Dictionary() {
       content: "• ";
       color: ${({ theme }) => theme.colors.darkPink};
     }
+  `;
+
+  const ContentDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+  `;
+
+  const SolidLine = styled.div`
+    position: relative;
+    left: 60px;
+    top: -10px;
+    width: 266px;
+    border-bottom: 1px solid #e9e9e9;
+  `;
+
+  const BottomSolidLine = styled(SolidLine)`
+    margin-top: 32px;
+    width: 327px;
+    left: 24px;
+  `;
+
+  const Example = styled.p`
+    font-size: 16px;
+    line-height: 19px;
+    color: ${({ theme }) => theme.colors.gray};
   `;
 
   return (
@@ -203,6 +230,7 @@ export default function Dictionary() {
         {verbsArray.map((item, index) => (
           <Ul key={index} style={{ marginTop: 30 }}>
             <Li>{item.definition}</Li>
+            {item.example ? <Example>“{item.example}”</Example> : null}
           </Ul>
         ))}
       </ContentDiv>
@@ -234,22 +262,3 @@ export default function Dictionary() {
     </>
   );
 }
-
-const ContentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const SolidLine = styled.div`
-  position: relative;
-  left: 60px;
-  top: -10px;
-  width: 266px;
-  border-bottom: 1px solid #e9e9e9;
-`;
-
-const BottomSolidLine = styled(SolidLine)`
-  margin-top: 32px;
-  width: 327px;
-  left: 24px;
-`;
