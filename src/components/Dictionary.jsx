@@ -198,42 +198,46 @@ export default function Dictionary() {
           </SynonymDiv>
         ) : null}
       </div>
-      <ContentDiv>
-        {value ? (
-          <p
-            style={{
-              fontSize: 18,
-              color: "black",
-              width: 65,
-              paddingLeft: 24,
-              marginBottom: 15,
-            }}
-          >
-            verb
-            <SolidLine></SolidLine>
-          </p>
-        ) : null}
 
-        {value ? (
-          <p
-            style={{
-              fontSize: 16,
-              color: "#757575",
-              width: 65,
-              height: 20,
-              paddingLeft: 24,
-            }}
-          >
-            Meaning
-          </p>
-        ) : null}
-        {verbsArray.map((item, index) => (
-          <Ul key={index} style={{ marginTop: 30 }}>
-            <Li>{item.definition}</Li>
-            {item.example ? <Example>“{item.example}”</Example> : null}
-          </Ul>
-        ))}
-      </ContentDiv>
+      {verbsArray.length > 0 && (
+        <ContentDiv>
+          {value ? (
+            <p
+              style={{
+                fontSize: 18,
+                color: "black",
+                width: 65,
+                paddingLeft: 24,
+                marginBottom: 15,
+              }}
+            >
+              verb
+              <SolidLine></SolidLine>
+            </p>
+          ) : null}
+
+          {value ? (
+            <p
+              style={{
+                fontSize: 16,
+                color: "#757575",
+                width: 65,
+                height: 20,
+                paddingLeft: 24,
+              }}
+            >
+              Meaning
+            </p>
+          ) : null}
+          {verbsArray.map((item, index) => (
+            <Ul key={index} style={{ marginTop: 30 }}>
+              <Li>{item.definition}</Li>
+              {item.example ? <Example>“{item.example}”</Example> : null}
+            </Ul>
+          ))}
+        </ContentDiv>
+      )}
+
       {value ? <BottomSolidLine /> : null}
       {value ? (
         <div style={{ marginBottom: 84 }}>
