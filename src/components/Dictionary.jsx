@@ -67,7 +67,7 @@ export default function Dictionary() {
       padding-left: 40px;
       padding-right: 40px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       padding-left: 351px;
       padding-right: 351px;
     }
@@ -103,7 +103,7 @@ export default function Dictionary() {
       left: 92%;
     }
 
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       left: 92.5%;
     }
   `;
@@ -117,7 +117,7 @@ export default function Dictionary() {
       padding-left: 40px;
       padding-right: 40px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       padding-left: 351px;
       padding-right: 351px;
     }
@@ -135,7 +135,7 @@ export default function Dictionary() {
       padding-left: 40px;
       padding-right: 40px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       padding-left: 351px;
       padding-right: 351px;
     }
@@ -164,7 +164,7 @@ export default function Dictionary() {
       width: 608px;
       left: 64px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       width: 656px;
       left: 64px;
     }
@@ -178,7 +178,7 @@ export default function Dictionary() {
       left: 40px;
       width: 668px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       left: 351px;
       width: 736px;
     }
@@ -192,7 +192,7 @@ export default function Dictionary() {
     @media (min-width: 768px) {
       padding-left: 40px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       padding-left: 351px;
       padding-right: 351px;
     }
@@ -205,7 +205,7 @@ export default function Dictionary() {
       padding-left: 40px;
       margin-bottom: 80px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       padding-left: 351px;
       padding-right: 351px;
       margin-bottom: 124px;

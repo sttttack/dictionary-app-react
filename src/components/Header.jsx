@@ -26,7 +26,7 @@ export default function Header() {
       margin-left: 18px;
       padding-top: 58px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       padding-left: 351px;
       padding-right: 351px;
     }
@@ -95,7 +95,7 @@ export default function Header() {
       left: 20%;
     }
 
-    @media (min-width: 1440px) {
+    @media (min-width: 1439px) {
       top: 72px;
       left: 10%;
     }

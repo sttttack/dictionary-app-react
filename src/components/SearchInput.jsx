@@ -29,7 +29,7 @@ const Input = styled.input`
     margin-right: 40px;
     margin-left: 40px;
   }
-  @media (min-width: 1440px) {
+  @media (min-width: 1439px) {
     max-width: 736px;
     margin-left: 351px;
     padding-right: 351px;
