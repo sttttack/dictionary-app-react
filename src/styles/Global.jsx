@@ -7,16 +7,17 @@ export const GlobalStyles = createGlobalStyle`
 
     * {
         box-sizing: border-box;
+        
     }
 
     html {
         font-size: 100%;
+        
     }
 
     body {
         padding: 0;
         margin: 0;
         background-color: ${({ theme }) => theme.colors.white};
-        font-family: ${({ theme }) => theme.fonts.inter}       
     }
 `;

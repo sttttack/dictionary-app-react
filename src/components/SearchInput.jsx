@@ -21,13 +21,19 @@ const Input = styled.input`
   background-image: url("${Search}");
   background-repeat: no-repeat;
   background-position: center;
-  background-position-x: 90%;
-`;
+  background-position-x: 95%;
 
-const EmptyValue = styled.p`
-  font-size: 16px;
-  color: #ff5252;
-  margin-left: 24px;
+  @media (min-width: 768px) {
+    height: 64px;
+    font-size: 20px;
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+  @media (min-width: 1440px) {
+    max-width: 736px;
+    margin-left: 351px;
+    padding-right: 351px;
+  }
 `;
 
 export default function SearchInput() {
@@ -44,7 +50,6 @@ export default function SearchInput() {
         value={value}
         onChange={handleChange}
       ></Input>
-      {/* <EmptyValue>{wordValue ? "" : ""}</EmptyValue> */}
     </MainDiv>
   );
 }

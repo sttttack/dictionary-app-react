@@ -5,7 +5,7 @@ import Moon from "../assets/images/icon-moon.svg";
 import styled from "styled-components";
 
 export default function Header() {
-  const [currentFont, setCurrentFont] = useState("Sans Serif");
+  const [currentFont, setCurrentFont] = useState("Fix this");
   const [isOpen, setIsOpen] = useState(false);
   const [toggle, setToggle] = useState(true);
   const toggling = () => setIsOpen(!isOpen);
@@ -21,6 +21,15 @@ export default function Header() {
     padding-top: 24px;
     padding-left: 24px;
     padding-right: 24px;
+    @media (min-width: 768px) {
+      margin-right: 18px;
+      margin-left: 18px;
+      padding-top: 58px;
+    }
+    @media (min-width: 1440px) {
+      padding-left: 351px;
+      padding-right: 351px;
+    }
   `;
 
   const DivAnother = styled.div`
@@ -74,17 +83,28 @@ export default function Header() {
   const DropDownListContainer = styled("div")`
     width: 182px;
     height: 152px;
-    position: fixed;
-    left: 110px;
+    position: relative;
+    left: 20%;
     top: 62px;
     background-color: #ffffff;
     border-radius: 30px;
     box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
+
+    @media (min-width: 768px) {
+      top: 72px;
+      left: 20%;
+    }
+
+    @media (min-width: 1440px) {
+      top: 72px;
+      left: 10%;
+    }
   `;
 
   const DropDownList = styled("ul")`
     color: ${({ theme }) => theme.colors.lightBlack};
     margin-top: 24px;
+    padding-top: 24px;
     font-size: 18px;
     width: auto;
     height: 104px;
