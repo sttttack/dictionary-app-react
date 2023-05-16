@@ -77,7 +77,6 @@ export default function Dictionary() {
     font-size: 32px;
     margin-top: 0;
     margin-bottom: 0;
-    font-family: ${({ theme }) => theme.fonts.interBold};
   `;
 
   const Phonetics = styled.p`

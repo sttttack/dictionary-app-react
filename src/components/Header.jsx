@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import lightLogo from "../assets/images/logo.svg";
 import arrowDown from "../assets/images/icon-arrow-down.svg";
 import Moon from "../assets/images/icon-moon.svg";
 import styled from "styled-components";
+import { theme } from "../styles/Theme";
 
 export default function Header() {
-  const [currentFont, setCurrentFont] = useState("Fix this");
+  const [currentFont, setCurrentFont] = useState("Sans Serif");
   const [isOpen, setIsOpen] = useState(false);
   const [toggle, setToggle] = useState(true);
   const toggling = () => setIsOpen(!isOpen);
@@ -13,6 +14,10 @@ export default function Header() {
   const toggleTheme = () => {
     setToggle(!toggle);
   };
+
+  useEffect(() => {
+    document.body.style.fontFamily = theme.fonts.interBold;
+  }, []);
 
   const Div = styled.div`
     display: flex;
@@ -75,7 +80,6 @@ export default function Header() {
   const DropDownContainer = styled("div")``;
 
   const DropDownHeader = styled("div")`
-    font-family: ${({ theme }) => theme.fonts.interBold};
     font-size: 14px;
     color: ${({ theme }) => theme.colors.lightBlack};
   `;
@@ -131,6 +135,22 @@ export default function Header() {
     }
   `;
 
+  const changeLanguage = (theme) => {
+    document.body.style.fontFamily = theme.fonts.interBold;
+    setIsOpen(!true);
+    setCurrentFont("Sans Serif");
+  };
+  const changeLanguageBold = (theme) => {
+    document.body.style.fontFamily = theme.fonts.lora;
+    setIsOpen(!true);
+    setCurrentFont("Serif");
+  };
+  const changeLanguageRegular = (theme) => {
+    document.body.style.fontFamily = theme.fonts.inconsolata;
+    setIsOpen(!true);
+    setCurrentFont("Mono");
+  };
+
   return (
     <Div>
       <img src={lightLogo}></img>
@@ -141,9 +161,15 @@ export default function Header() {
             {isOpen && (
               <DropDownListContainer>
                 <DropDownList>
-                  <ListItem>Sans Serif</ListItem>
-                  <ListItem>Serif</ListItem>
-                  <ListItem>Monospace</ListItem>
+                  <ListItem onClick={() => changeLanguage(theme)}>
+                    Sans Serif
+                  </ListItem>
+                  <ListItem onClick={() => changeLanguageBold(theme)}>
+                    Serif
+                  </ListItem>
+                  <ListItem onClick={() => changeLanguageRegular(theme)}>
+                    Monospace
+                  </ListItem>
                 </DropDownList>
               </DropDownListContainer>
             )}
