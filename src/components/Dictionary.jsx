@@ -233,6 +233,7 @@ export default function Dictionary() {
     color: ${({ theme, dark }) =>
       !dark ? theme.light.lightBlackTwo : theme.dark.white};
     @media (max-width: 768px) {
+      display: none;
       position: relative;
       margin-top: 132px;
       text-align: center;
