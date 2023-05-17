@@ -31,7 +31,7 @@ const Input = styled.input`
     margin-right: 40px;
     margin-left: 40px;
   }
-  @media (min-width: 1439px) {
+  @media (min-width: 1024px) {
     max-width: 100%;
     margin-left: 351px;
     margin-right: 351px;

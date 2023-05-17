@@ -69,7 +69,7 @@ export default function Dictionary() {
       padding-left: 40px;
       padding-right: 40px;
     }
-    @media (min-width: 1439px) {
+    @media (min-width: 1024px) {
       padding-left: 351px;
       padding-right: 351px;
     }
@@ -86,6 +86,9 @@ export default function Dictionary() {
   const Phonetics = styled.p`
     color: ${({ theme }) => theme.light.pink};
     height: fit-content;
+    @media (min-width: 1024px) {
+      font-size: 24px;
+    }
   `;
 
   const PlayIcon = styled.div`
@@ -108,10 +111,6 @@ export default function Dictionary() {
     @media (min-width: 1024px) {
       left: 92%;
     }
-
-    @media (min-width: 1439px) {
-      left: 92.5%;
-    }
   `;
 
   const SynonymDiv = styled.div`
@@ -123,7 +122,7 @@ export default function Dictionary() {
       padding-left: 40px;
       padding-right: 40px;
     }
-    @media (min-width: 1439px) {
+    @media (min-width: 1024px) {
       padding-left: 351px;
       padding-right: 351px;
     }
@@ -141,17 +140,18 @@ export default function Dictionary() {
       padding-left: 40px;
       padding-right: 40px;
     }
-    @media (min-width: 1439px) {
+    @media (min-width: 1024px) {
       padding-left: 351px;
       padding-right: 351px;
+      font-size: 18px;
     }
   `;
 
   const Li = styled.li`
-    list-style-type: none;
-    &:before {
-      content: "• ";
-      color: ${({ theme }) => theme.light.darkPink};
+    margin-left: 24px;
+    @media (min-width: 768px) {
+      padding-left: 20px;
+      margin-left: 42px;
     }
   `;
 
@@ -170,9 +170,9 @@ export default function Dictionary() {
       width: 608px;
       left: 64px;
     }
-    @media (min-width: 1439px) {
+    @media (min-width: 1024px) {
       width: 656px;
-      left: 64px;
+      left: 75px;
     }
   `;
 
@@ -184,7 +184,7 @@ export default function Dictionary() {
       left: 40px;
       width: 668px;
     }
-    @media (min-width: 1439px) {
+    @media (min-width: 1024px) {
       left: 351px;
       width: 736px;
     }
@@ -199,9 +199,10 @@ export default function Dictionary() {
     @media (min-width: 768px) {
       padding-left: 40px;
     }
-    @media (min-width: 1439px) {
+    @media (min-width: 1024px) {
       padding-left: 351px;
       padding-right: 351px;
+      font-size: 24px;
     }
   `;
 
@@ -212,7 +213,7 @@ export default function Dictionary() {
       padding-left: 40px;
       margin-bottom: 80px;
     }
-    @media (min-width: 1439px) {
+    @media (min-width: 1024px) {
       padding-left: 351px;
       padding-right: 351px;
       margin-bottom: 124px;
@@ -223,93 +224,140 @@ export default function Dictionary() {
     font-size: 16px;
     line-height: 19px;
     color: ${({ theme }) => theme.light.gray};
+    @media (min-width: 1439px) {
+      margin-left: 62px;
+    }
+  `;
+
+  const FoundDef = styled.div`
+    color: ${({ theme, dark }) =>
+      !dark ? theme.light.lightBlackTwo : theme.dark.white};
+    @media (max-width: 768px) {
+      position: relative;
+      margin-top: 132px;
+      text-align: center;
+    }
+    @media (min-width: 1439px) {
+      position: relative;
+      left: 25%;
+      margin-top: 132px;
+      text-align: center;
+      width: 736px;
+      height: 204px;
+
+      p {
+      }
+    }
   `;
 
   return (
     <>
-      <MainDiv>
-        <WordP dark={dark}>{value ? post[0].word : null}</WordP>
-        <Phonetics>{value ? post[0].phonetic : null}</Phonetics>
-        <PlayIcon>
+      {value !== post[0].word ? (
+        <FoundDef dark={dark}>
+          <h1>😕</h1>
+          <h2> No Definitions Found</h2>
+          <p>
+            Sorry pal, we couldn't find definitions for the word you were
+            looking for. You can try the search again at later time or head to
+            the web instead.
+          </p>
+        </FoundDef>
+      ) : (
+        <>
+          <MainDiv>
+            <WordP dark={dark}>{value ? post[0].word : null}</WordP>
+            <Phonetics>{value ? post[0].phonetic : null}</Phonetics>
+            <PlayIcon>
+              {value ? (
+                <img
+                  style={{ cursor: "pointer" }}
+                  src={Play}
+                  onClick={() => {
+                    playSound();
+                  }}
+                ></img>
+              ) : null}
+            </PlayIcon>
+          </MainDiv>
+          <ContentDiv>
+            {value ? (
+              <CustomP dark={dark} style={{ fontStyle: "Italic" }}>
+                noun
+                <SolidLine></SolidLine>
+              </CustomP>
+            ) : null}
+
+            {value ? <CustomP dark={dark}>Meaning</CustomP> : null}
+
+            {noun.map((item, index) => (
+              <Ul
+                key={index}
+                style={{ marginTop: 30, color: !dark ? "black" : "white" }}
+                dark={dark}
+              >
+                {value ? <Li>{item.definition}</Li> : null}
+              </Ul>
+            ))}
+          </ContentDiv>
+          <div>
+            {value ? (
+              <SynonymDiv>
+                <p style={{ color: "#757575", fontStyle: "Italic" }}>
+                  Synonyms
+                </p>
+                <p style={{ color: "#A445ED" }}>{newSynonyms}</p>
+              </SynonymDiv>
+            ) : null}
+          </div>
+
+          {verbsArray.length > 0 && (
+            <ContentDiv>
+              {value ? (
+                <CustomP dark={dark} style={{ fontStyle: "Italic" }}>
+                  verb
+                  <SolidLine></SolidLine>
+                </CustomP>
+              ) : null}
+              {value ? <CustomP dark={dark}>Meaning</CustomP> : null}
+              {verbsArray.length >= 1 && value
+                ? verbsArray.map((item, index) => (
+                    <Ul
+                      key={index}
+                      style={{
+                        color: !dark ? "black" : "white",
+                        marginTop: 30,
+                      }}
+                    >
+                      <Li>{item.definition}</Li>
+                      {item.example ? (
+                        <Example>“{item.example}”</Example>
+                      ) : null}
+                    </Ul>
+                  ))
+                : null}
+            </ContentDiv>
+          )}
+          {value ? <BottomSolidLine /> : null}
           {value ? (
-            <img
-              style={{ cursor: "pointer" }}
-              src={Play}
-              onClick={() => {
-                playSound();
-              }}
-            ></img>
-          ) : null}
-        </PlayIcon>
-      </MainDiv>
-      <ContentDiv>
-        {value ? (
-          <CustomP dark={dark} style={{ fontStyle: "Italic" }}>
-            noun
-            <SolidLine></SolidLine>
-          </CustomP>
-        ) : null}
+            <div>
+              <CustomP style={{ color: !dark ? "black" : "white" }}>
+                Source
+              </CustomP>
 
-        {value ? <CustomP dark={dark}>Meaning</CustomP> : null}
-
-        {noun.map((item, index) => (
-          <Ul
-            key={index}
-            style={{ marginTop: 30, color: !dark ? "black" : "white" }}
-            dark={dark}
-          >
-            {value ? <Li>{item.definition}</Li> : null}
-          </Ul>
-        ))}
-      </ContentDiv>
-      <div>
-        {value ? (
-          <SynonymDiv>
-            <p style={{ color: "#757575", fontStyle: "Italic" }}>Synonyms</p>
-            <p style={{ color: "#A445ED" }}>{newSynonyms}</p>
-          </SynonymDiv>
-        ) : null}
-      </div>
-
-      {verbsArray.length > 0 && (
-        <ContentDiv>
-          {value ? (
-            <CustomP dark={dark} style={{ fontStyle: "Italic" }}>
-              verb
-              <SolidLine></SolidLine>
-            </CustomP>
-          ) : null}
-          {value ? <CustomP>Meaning</CustomP> : null}
-          {verbsArray.length >= 1 && value
-            ? verbsArray.map((item, index) => (
-                <Ul
-                  key={index}
-                  style={{ marginTop: 30, color: !dark ? "black" : "white" }}
+              <CustomA>
+                <a
+                  href={wikiLink}
+                  target="_blank"
+                  style={{ color: "#757575", cursor: "pointer" }}
                 >
-                  <Li>{item.definition}</Li>
-                  {item.example ? <Example>“{item.example}”</Example> : null}
-                </Ul>
-              ))
-            : null}
-        </ContentDiv>
+                  {wikiLink}&nbsp;
+                  <img src={Window} />
+                </a>
+              </CustomA>
+            </div>
+          ) : null}
+        </>
       )}
-      {value ? <BottomSolidLine /> : null}
-      {value ? (
-        <div>
-          <CustomP style={{ color: !dark ? "black" : "white" }}>Source</CustomP>
-
-          <CustomA>
-            <a
-              href={wikiLink}
-              target="_blank"
-              style={{ color: "#757575", cursor: "pointer" }}
-            >
-              {wikiLink}&nbsp;
-              <img src={Window} />
-            </a>
-          </CustomA>
-        </div>
-      ) : null}
     </>
   );
 }
