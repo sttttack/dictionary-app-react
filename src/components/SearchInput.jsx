@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import Word from "../MyContext";
 import Search from "../assets/images/icon-search.svg";
+import Dark from "../DarkContext";
 
 const MainDiv = styled.div`
   display: flex;
@@ -14,7 +15,8 @@ const Input = styled.input`
   margin-right: 24px;
   margin-left: 24px;
   height: 48px;
-  background-color: #f4f4f4;
+  background-color: ${({ theme, dark }) =>
+    !dark ? theme.light.someColorTwo : theme.dark.lightBlackTwo};
   border-style: none;
   border-radius: 16px;
   padding-left: 24px;
@@ -22,7 +24,7 @@ const Input = styled.input`
   background-repeat: no-repeat;
   background-position: center;
   background-position-x: 95%;
-
+  color: ${({ theme, dark }) => (dark ? theme.light.white : theme.dark.black)};
   @media (min-width: 768px) {
     height: 64px;
     font-size: 20px;
@@ -30,14 +32,16 @@ const Input = styled.input`
     margin-left: 40px;
   }
   @media (min-width: 1439px) {
-    max-width: 736px;
+    max-width: 100%;
     margin-left: 351px;
+    margin-right: 351px;
     padding-right: 351px;
   }
 `;
 
 export default function SearchInput() {
   const { value, setValue } = useContext(Word);
+  const { dark } = useContext(Dark);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -49,6 +53,7 @@ export default function SearchInput() {
         placeholder="Search for any word..."
         value={value}
         onChange={handleChange}
+        dark={dark}
       ></Input>
     </MainDiv>
   );

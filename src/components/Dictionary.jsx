@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import Word from "../MyContext";
+import Dark from "../DarkContext";
 import styled from "styled-components";
 import Play from "../assets/images/icon-play.svg";
 import Window from "../assets/images/icon-new-window.svg";
@@ -8,6 +9,7 @@ import Window from "../assets/images/icon-new-window.svg";
 export default function Dictionary() {
   const { value, setValue } = useContext(Word);
   const [post, setPost] = useState(null);
+  const { dark } = useContext(Dark);
 
   useEffect(() => {
     axios
@@ -77,10 +79,12 @@ export default function Dictionary() {
     font-size: 32px;
     margin-top: 0;
     margin-bottom: 0;
+    color: ${({ theme, dark }) =>
+      dark ? theme.light.white : theme.dark.black};
   `;
 
   const Phonetics = styled.p`
-    color: ${({ theme }) => theme.colors.pink};
+    color: ${({ theme }) => theme.light.pink};
     height: fit-content;
   `;
 
@@ -92,6 +96,9 @@ export default function Dictionary() {
     img {
       width: 48px;
       height: 48px;
+      &:hover {
+        filter: brightness(2);
+      }
     }
 
     @media (min-width: 768px) {
@@ -129,7 +136,7 @@ export default function Dictionary() {
     font-size: 15px;
     margin-top: 0;
     margin-bottom: 0;
-    color: ${({ theme }) => theme.colors.lightBlack};
+    color: ${({ theme }) => theme.light.lightBlack};
     @media (min-width: 768px) {
       padding-left: 40px;
       padding-right: 40px;
@@ -144,7 +151,7 @@ export default function Dictionary() {
     list-style-type: none;
     &:before {
       content: "• ";
-      color: ${({ theme }) => theme.colors.darkPink};
+      color: ${({ theme }) => theme.light.darkPink};
     }
   `;
 
@@ -185,7 +192,8 @@ export default function Dictionary() {
 
   const CustomP = styled.p`
     font-size: 18px;
-    color: black;
+    color: ${({ theme, dark }) =>
+      dark ? theme.light.white : theme.dark.black};
     width: 65px;
     padding-left: 24px;
     @media (min-width: 768px) {
@@ -214,13 +222,13 @@ export default function Dictionary() {
   const Example = styled.p`
     font-size: 16px;
     line-height: 19px;
-    color: ${({ theme }) => theme.colors.gray};
+    color: ${({ theme }) => theme.light.gray};
   `;
 
   return (
     <>
       <MainDiv>
-        <WordP>{value ? post[0].word : null}</WordP>
+        <WordP dark={dark}>{value ? post[0].word : null}</WordP>
         <Phonetics>{value ? post[0].phonetic : null}</Phonetics>
         <PlayIcon>
           {value ? (
@@ -236,16 +244,20 @@ export default function Dictionary() {
       </MainDiv>
       <ContentDiv>
         {value ? (
-          <CustomP>
+          <CustomP dark={dark} style={{ fontStyle: "Italic" }}>
             noun
             <SolidLine></SolidLine>
           </CustomP>
         ) : null}
 
-        {value ? <CustomP>Meaning</CustomP> : null}
+        {value ? <CustomP dark={dark}>Meaning</CustomP> : null}
 
         {noun.map((item, index) => (
-          <Ul key={index} style={{ marginTop: 30 }}>
+          <Ul
+            key={index}
+            style={{ marginTop: 30, color: !dark ? "black" : "white" }}
+            dark={dark}
+          >
             {value ? <Li>{item.definition}</Li> : null}
           </Ul>
         ))}
@@ -253,7 +265,7 @@ export default function Dictionary() {
       <div>
         {value ? (
           <SynonymDiv>
-            <p style={{ color: "#757575" }}>Synonyms</p>
+            <p style={{ color: "#757575", fontStyle: "Italic" }}>Synonyms</p>
             <p style={{ color: "#A445ED" }}>{newSynonyms}</p>
           </SynonymDiv>
         ) : null}
@@ -262,7 +274,7 @@ export default function Dictionary() {
       {verbsArray.length > 0 && (
         <ContentDiv>
           {value ? (
-            <CustomP>
+            <CustomP dark={dark} style={{ fontStyle: "Italic" }}>
               verb
               <SolidLine></SolidLine>
             </CustomP>
@@ -270,7 +282,10 @@ export default function Dictionary() {
           {value ? <CustomP>Meaning</CustomP> : null}
           {verbsArray.length >= 1 && value
             ? verbsArray.map((item, index) => (
-                <Ul key={index} style={{ marginTop: 30 }}>
+                <Ul
+                  key={index}
+                  style={{ marginTop: 30, color: !dark ? "black" : "white" }}
+                >
                   <Li>{item.definition}</Li>
                   {item.example ? <Example>“{item.example}”</Example> : null}
                 </Ul>
@@ -281,10 +296,17 @@ export default function Dictionary() {
       {value ? <BottomSolidLine /> : null}
       {value ? (
         <div>
-          <CustomP>Source</CustomP>
-          <CustomA href={wikiLink} target="_blank" style={{ color: "#757575" }}>
-            {wikiLink}&nbsp;
-            <img src={Window} />
+          <CustomP style={{ color: !dark ? "black" : "white" }}>Source</CustomP>
+
+          <CustomA>
+            <a
+              href={wikiLink}
+              target="_blank"
+              style={{ color: "#757575", cursor: "pointer" }}
+            >
+              {wikiLink}&nbsp;
+              <img src={Window} />
+            </a>
           </CustomA>
         </div>
       ) : null}

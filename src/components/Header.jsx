@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import lightLogo from "../assets/images/logo.svg";
 import arrowDown from "../assets/images/icon-arrow-down.svg";
 import Moon from "../assets/images/icon-moon.svg";
 import styled from "styled-components";
+import Dark from "../DarkContext";
 import { theme } from "../styles/Theme";
 
 export default function Header() {
@@ -10,14 +11,12 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [toggle, setToggle] = useState(true);
   const toggling = () => setIsOpen(!isOpen);
+  const { dark, setDark } = useContext(Dark);
 
   const toggleTheme = () => {
     setToggle(!toggle);
+    setDark(!dark);
   };
-
-  useEffect(() => {
-    document.body.style.fontFamily = theme.fonts.interBold;
-  }, []);
 
   const Div = styled.div`
     display: flex;
@@ -64,16 +63,19 @@ export default function Header() {
     width: 40px;
     height: 20px;
     background-color: ${({ theme }) =>
-      toggle ? theme.colors.gray : theme.colors.pink};
+      dark ? theme.light.pink : theme.light.gray};
     border-radius: 10px;
+    cursor: pointer;
   `;
 
   const Button = styled.div`
     position: relative;
     left: ${({ props }) => (toggle ? "0" : "55%")};
+    transition: 0.3s;
+
     width: 14px;
     height: 14px;
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.light.white};
     border-radius: 50%;
   `;
 
@@ -81,7 +83,9 @@ export default function Header() {
 
   const DropDownHeader = styled("div")`
     font-size: 14px;
-    color: ${({ theme }) => theme.colors.lightBlack};
+    cursor: pointer;
+    color: ${({ theme, dark }) =>
+      !dark ? theme.light.black : theme.dark.white};
   `;
 
   const DropDownListContainer = styled("div")`
@@ -90,7 +94,8 @@ export default function Header() {
     position: relative;
     left: 20%;
     top: 62px;
-    background-color: #ffffff;
+    background-color: ${({ theme }) =>
+      !dark ? theme.light.white : theme.dark.lightBlackTwo};
     border-radius: 30px;
     box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
 
@@ -106,7 +111,7 @@ export default function Header() {
   `;
 
   const DropDownList = styled("ul")`
-    color: ${({ theme }) => theme.colors.lightBlack};
+    color: ${({ theme }) => theme.light.lightBlack};
     margin-top: 24px;
     padding-top: 24px;
     font-size: 18px;
@@ -122,16 +127,26 @@ export default function Header() {
     &:nth-child(1) {
       font-family: ${({ theme }) => theme.fonts.interBold};
       font-size: 18px;
+      color: ${({ theme, dark }) =>
+        !dark ? theme.light.black : theme.dark.white};
     }
     &:nth-child(2) {
       font-size: 18px;
       font-family: ${({ theme }) => theme.fonts.lora};
       font-style: bold;
+      color: ${({ theme, dark }) =>
+        !dark ? theme.light.black : theme.dark.white};
     }
 
     &:nth-child(3) {
       font-family: ${({ theme }) => theme.fonts.inconsolata};
       font-size: 18px;
+      color: ${({ theme, dark }) =>
+        !dark ? theme.light.black : theme.dark.white};
+    }
+
+    &:hover {
+      color: ${({ theme }) => theme.light.pink};
     }
   `;
 
@@ -157,17 +172,25 @@ export default function Header() {
       <DivAnother>
         <LanguageDiv>
           <DropDownContainer>
-            <DropDownHeader onClick={toggling}>{currentFont}</DropDownHeader>
+            <DropDownHeader onClick={toggling} dark={dark}>
+              {currentFont}
+            </DropDownHeader>
             {isOpen && (
               <DropDownListContainer>
                 <DropDownList>
-                  <ListItem onClick={() => changeLanguage(theme)}>
+                  <ListItem onClick={() => changeLanguage(theme)} dark={dark}>
                     Sans Serif
                   </ListItem>
-                  <ListItem onClick={() => changeLanguageBold(theme)}>
+                  <ListItem
+                    onClick={() => changeLanguageBold(theme)}
+                    dark={dark}
+                  >
                     Serif
                   </ListItem>
-                  <ListItem onClick={() => changeLanguageRegular(theme)}>
+                  <ListItem
+                    onClick={() => changeLanguageRegular(theme)}
+                    dark={dark}
+                  >
                     Monospace
                   </ListItem>
                 </DropDownList>

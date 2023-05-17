@@ -3,6 +3,8 @@ import fontCss from "../styles/fonts.module.css";
 
 export const GlobalStyles = createGlobalStyle`
 
+
+
     ${fontCss}
 
     * {
@@ -18,6 +20,8 @@ export const GlobalStyles = createGlobalStyle`
     body {
         padding: 0;
         margin: 0;
-        background-color: ${({ theme }) => theme.colors.white};
+        font-family: ${({ theme }) => theme.fonts.interBold};;
+        background-color: ${({ theme, dark }) =>
+          !dark ? theme.light.white : theme.dark.black};
     }
 `;

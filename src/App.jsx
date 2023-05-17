@@ -7,20 +7,24 @@ import Header from "./components/Header";
 import SearchInput from "./components/SearchInput";
 import Dictionary from "./components/Dictionary";
 import Word from "./MyContext";
+import Dark from "./DarkContext";
 
 function App() {
   const [value, setValue] = useState("");
+  const [dark, setDark] = useState(false);
 
   return (
     <>
-      <Word.Provider value={{ value, setValue }}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <Header />
-          <SearchInput />
-          <Dictionary />
-        </ThemeProvider>
-      </Word.Provider>
+      <Dark.Provider value={{ dark, setDark }}>
+        <Word.Provider value={{ value, setValue }}>
+          <ThemeProvider theme={theme}>
+            <GlobalStyles dark={dark} />
+            <Header />
+            <SearchInput />
+            <Dictionary />
+          </ThemeProvider>
+        </Word.Provider>
+      </Dark.Provider>
     </>
   );
 }
