@@ -31,8 +31,8 @@ export default function Header() {
       padding-top: 58px;
     }
     @media (min-width: 1024px) {
-      padding-left: 351px;
-      padding-right: 351px;
+      padding-right: min(351px, 50%);
+      padding-left: min(351px, 50%);
     }
   `;
 

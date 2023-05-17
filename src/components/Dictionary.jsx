@@ -238,7 +238,7 @@ export default function Dictionary() {
       margin-top: 132px;
       text-align: center;
     }
-    @media (min-width: 1439px) {
+    @media (min-width: 1024px) {
       position: relative;
       left: 25%;
       margin-top: 132px;

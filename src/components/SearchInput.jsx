@@ -28,14 +28,14 @@ const Input = styled.input`
   @media (min-width: 768px) {
     height: 64px;
     font-size: 20px;
-    margin-right: 40px;
-    margin-left: 40px;
+    padding-right: 40px;
+    padding-left: 40px;
   }
   @media (min-width: 1024px) {
     max-width: 100%;
+    position: relative;
     margin-left: 351px;
     margin-right: 351px;
-    padding-right: 351px;
   }
 `;
 
