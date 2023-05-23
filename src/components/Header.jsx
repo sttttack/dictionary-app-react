@@ -107,6 +107,7 @@ export default function Header() {
     @media (min-width: 1024px) {
       top: 72px;
       left: 10%;
+      z-index: 1;
     }
   `;
 
